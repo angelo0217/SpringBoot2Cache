@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ScheduledFuture;
@@ -24,14 +25,10 @@ public class ScheduleContorller {
     @Autowired
     ThreadPoolTaskScheduler threadPoolTaskScheduler;
 
-    private Map<String,ScheduledFuture<?>> futures;
+    private Map<String,ScheduledFuture<?>> futures = new HashMap<>();
 
     @GetMapping("testS/{name}")
     public String testSchedule(@PathVariable String name){
-        if(futures == null){
-            futures = new HashMap<>();
-        }
-
         TestSchedule testSchedule = new TestSchedule();
         testSchedule.setName(name);
         if (futures.get(name) != null) {
@@ -43,7 +40,16 @@ public class ScheduleContorller {
 
         return "ok";
     }
+    @GetMapping("testT/{name}")
+    public String testScheduleByTime(@PathVariable String name){
+        TestSchedule testSchedule = new TestSchedule();
+        testSchedule.setName(name);
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.SECOND, 5);
+        futures.put(name, threadPoolTaskScheduler.schedule(testSchedule, calendar.getTime()));
 
+        return "ok";
+    }
     @GetMapping("stop/{name}")
     public String stop(@PathVariable String name){
         System.out.println(futures.get(name).isDone());
