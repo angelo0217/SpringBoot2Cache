@@ -25,7 +25,6 @@ import java.util.concurrent.TimeUnit;
  */
 @Configuration
 @EnableCaching
-@EnableScheduling
 public class CachingConfig {
     @Bean("testManger")
     @Primary
@@ -89,8 +88,8 @@ public class CachingConfig {
     }
 
     @CacheEvict(allEntries = true, value = {"key2", "userInfo"}, cacheManager = "test2Manager")
-    @Scheduled(cron = "0 0/1 * * * ?")
+    @Scheduled(cron = "0 0/30 * * * ?")
     public void reportCacheEvict() {
-        System.out.println("==================刷");
+        System.out.println("==================重置 test2Manager");
     }
 }
