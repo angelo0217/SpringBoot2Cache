@@ -37,11 +37,11 @@ public class TestMain {
                 if(!StringUtils.isEmpty(myAnnotation.bindValue())){
                     System.out.println(field.getType());
                     if(field.getType().equals(String.class)){
-                        String methodName = "get"+field.getName().substring(0,1).toUpperCase() + field.getName().substring(1, field.getName().length());
-//                        System.out.println(field.get(obj));
+                        String methodName = "get"+ Character.toUpperCase(field.getName().charAt(0)) + field.getName().substring(1);
                         System.out.println(methodName);
                         Method privateMethod1 = obj.getClass().getDeclaredMethod(methodName, null);
                         System.out.println(privateMethod1.invoke(obj, null));
+
                     }
                 }
                 if(field.getType().equals(List.class)){
