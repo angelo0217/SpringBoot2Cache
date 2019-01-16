@@ -19,7 +19,7 @@ public class UserCache {
     UserInfoMapper userInfoMapper;
 
     @Cacheable(cacheNames = "userInfo" , key = "#userSeq", cacheManager = "testManger")
-    public UserInfo getUser(int userSeq){
+    public Object getUser(int userSeq){
         UserInfo userInfo = userInfoMapper.selectByPrimaryKey(userSeq);
         System.out.println(">>>>>>>>>>in");
         return userInfo;

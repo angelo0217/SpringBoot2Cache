@@ -24,7 +24,7 @@ public class TestController {
     UserCache userCache;
 
     @RequestMapping("/getUser")
-    public UserInfo getUser() {
+    public Object getUser() {
 
         return userCache.getUser(1);
     }
