@@ -8,9 +8,9 @@ import java.util.List;
  * @since 1.0
  */
 public class TestVo {
-    @MyAnnotation(isNull = false, bindValue = "123")
+    @StringChk(isNull = false, defaultValue = "123", cntaintValue = "dev,cnt,ans", errMag = "字串內容錯誤")
     private String name;
-    @MyAnnotation(isNull = false)
+    @ListChk(isEmpty = false)
     private List<Integer> nos;
 
     public String getName() {
