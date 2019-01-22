@@ -8,7 +8,7 @@ import java.util.List;
  * @since 1.0
  */
 public class TestVo {
-    @StringChk(isNull = false, defaultValue = "123", cntaintValue = "dev,cnt,ans", errMag = "字串內容錯誤")
+    @StringChk(isNull = false, defaultValue = "dev", cntaintValue = "dev,cnt,ans", errMag = "字串內容錯誤")
     private String name;
     @ListChk(isEmpty = false)
     private List<Integer> nos;
